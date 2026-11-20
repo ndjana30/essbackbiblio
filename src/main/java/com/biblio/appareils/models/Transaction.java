@@ -36,8 +36,12 @@ public class Transaction {
     @JsonManagedReference
     private User user;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "transaction_id")
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(
+            name = "transaction_appareil", // The name of the intermediate join table
+            joinColumns = @JoinColumn(name = "transaction_id"), // Foreign key pointing to Transaction
+            inverseJoinColumns = @JoinColumn(name = "appareil_id") // Foreign key pointing to Appareils
+    )
     private List<Appareils> appareilsList= new ArrayList<>();
 
     public void addAppareils(List<Appareils> appareils)

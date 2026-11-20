@@ -3,12 +3,9 @@ package com.biblio.appareils.logic.rest;
 import java.io.IOException;
 import java.util.List;
 
-import com.biblio.appareils.dto.AppareilDto;
 import com.biblio.appareils.logic.TransactionService;
 import com.biblio.appareils.models.Appareils;
-import lombok.Locked;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -18,8 +15,7 @@ import com.biblio.appareils.logic.AppareilService;
 @RestController
 @RequestMapping("/api/v1")
 public class RestControllerAll {
-    
-    
+
     @Autowired 
     public AppareilService appareilService;
     @Autowired
@@ -27,7 +23,6 @@ public class RestControllerAll {
 
     public RestControllerAll() {
     }
-    
 
     @PostMapping(value = "/appareils/add")
     public Object postAppareil(@RequestParam ("name") String name,
@@ -59,6 +54,16 @@ public class RestControllerAll {
     public Object endTransactionById(@RequestParam ("id") Long id)
     {
         return transactionService.endTransaction(id);
+    }
+    @GetMapping ("/transaction/user")
+    public Object getUserTransaction()
+    {
+        return transactionService.getUserTransactions();
+    }
+    @GetMapping ("/user/infos")
+    public Object getUserDetails()
+    {
+        return transactionService.getUserInfos();
     }
     
 }
