@@ -1,0 +1,14 @@
+services:
+  backend:
+    image: essbackbiblio
+    container_name: essbackbiblio
+    ports:
+      - "8080:8080"
+
+  frontend:
+    image: essfrontbiblio
+    container_name: essfrontbiblio
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
